@@ -1,0 +1,3 @@
+python-dotenv
+browserstack-local==1.2.7
+selenium==4.18.1
