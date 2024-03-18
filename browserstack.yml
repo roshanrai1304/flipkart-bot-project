@@ -1,0 +1,41 @@
+
+# BrowserStack userName and accesskey
+userName:          # USERNAME
+accessKey:         # ACCESSKEY
+
+# Project and Build Details
+projectName: FlipKart Bot PC
+buildName: flipkart bot tests PC
+buildIdentifier: '#${BUILD_NUMBER}'
+
+# Details of the platforms
+platforms:
+  - os: OS X
+    osVersion: Sonoma
+    browserName: Safari
+    browserVersion: 17.3
+  - os: Windows
+    osVersion: 10
+    browserName: Chrome
+    browserVersion: latest
+  - os: OS X
+    osVersion: Ventura
+    browserName: Edge
+    browserVersion: latest
+  - os: OS X
+    osVersion: Catalina
+    browserName: Safari
+    browserVersion: 13.1
+  - os: Windows
+    osVersion: 10
+    browserName: Firefox
+    browserVersion: 121.0
+  
+
+browserstackLocal: false
+
+source: python-browserstack:sample-sdk:v1.0
+
+debug: false
+networkLogs: true 
+consoleLogs: errors

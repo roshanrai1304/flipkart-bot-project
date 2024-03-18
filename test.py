@@ -1,4 +1,3 @@
-import json
 from search.search import Search
 import time
 import pandas as pd
