@@ -4,12 +4,26 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import logging
 
+
+"""
+The following class is used to Apply the filters on the Page which appeared after entering 
+the product. The class take's an argument the driver Object which was used to search for product
+"""
+
 class SearchFilters:
     
     def __init__(self, driver: WebDriver):
         self.driver = driver
         
     def check_filter(self, filter):
+        
+        """
+        The following method checks whether the filter is applied or not on the page.
+        
+        Args:
+          filter: filter that has to be applied
+        """
+        
         filter_element = WebDriverWait(self.driver, 10).until(
             (EC.visibility_of_element_located((By.CSS_SELECTOR, 'div[class="_2vLW0p"]')))
         )
@@ -35,6 +49,13 @@ class SearchFilters:
         
     def apply_category(self, category):
         
+        """
+        The following method is used to apply the category to the products page and also checks the filter
+        is applied or not
+        
+        category: Category applied to the products
+        """
+        
         try:
             category_element = WebDriverWait(self.driver, 10).until(
                 (EC.visibility_of_element_located((By.CSS_SELECTOR, 'a[class="_1jJQdf _2Mji8F"]')))
@@ -48,6 +69,14 @@ class SearchFilters:
             logging.error(f"Error in applying category: {e}")
             
     def apply_brand(self, brand):
+        
+        """
+        The following method is used to apply the brand to the products page and also checks the filter
+        is applied or not
+        
+        brand: Brand applied to the products
+        """
+        
         try:
             WebDriverWait(self.driver, 10).until(
                 (EC.element_to_be_clickable((By.CSS_SELECTOR, f"div[title={brand}]")))
@@ -58,6 +87,14 @@ class SearchFilters:
         
         
     def select_assured(self, value):
+        
+        """
+        The following method is used to select flipkart assured to the products page and also checks the filter
+        is applied or not
+        
+        value = value of the Flipkart assured
+        """
+        
         try:
             if value:
                 WebDriverWait(self.driver, 10).until(
@@ -68,6 +105,13 @@ class SearchFilters:
             logging.error(f"Error in applying assured filter: {e}")
             
     def sort_price(self, price_high_to_low=None):
+        
+        """
+        The following method is used to sort the products page and also checks the filter
+        is applied or not
+        
+        price_high_to_low: Sort the price
+        """
         
         try:
             if price_high_to_low:

@@ -3,12 +3,24 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 import logging
 
+"""
+The following class is used to collect the attributes from the final page. The class is instantiated with 
+driver Object.
+"""
+
 class CollectData:
     
     def __init__(self, driver: WebDriver):
         self.driver = driver
         
     def pull_attributes(self):
+        
+        """
+        The following is used to pull the attributes data from the final page and return the results
+
+        Returns:
+            list: the final list of the results
+        """
         
         try:
             results = self.driver.find_elements(By.CLASS_NAME, '_2kHMtA')

@@ -12,6 +12,15 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.common.exceptions import NoSuchElementException
 from prettytable import PrettyTable
 
+
+
+"""
+     The following Search class inhert's webdrive.Chrome class and inititalized with it that 
+     do the process of searching products, applying filter and storing the attributes after applying the filters
+     The process of Applying filters is done with help of other two class that are define
+     SearFilters and CollectData
+"""
+
 class Search(webdriver.Chrome):
     
     def __init__(self, teardown=False):
@@ -28,6 +37,13 @@ class Search(webdriver.Chrome):
           self.quit()
           
     def land_first_page(self):
+        
+        """
+        The following method is used to handle the operation of searching for the flipkart website and
+        it does that after it locates the title of the HTML page. After the page is loaded it executes
+        script to set the status in the BrowserStack Automate Infrastructure else it executes the script for error 
+        """
+        
         try:
             self.get(const.BASE_URL)  
             WebDriverWait(self, 10).until(EC.title_contains(
@@ -43,6 +59,17 @@ class Search(webdriver.Chrome):
                 'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": ' + json.dumps(message) + '}}')
             
     def product_search(self, product):
+        
+        """
+        The following methof is used to search for the particular product and executes the script
+        accordingly to update the status.
+        
+        Args:
+          product: Name of the product
+          
+        
+        """
+        
         try:
             search_field = WebDriverWait(self, 10).until(
                 (EC.visibility_of_element_located((By.CSS_SELECTOR, 'input[class="Pke_EE"]')))
@@ -63,6 +90,18 @@ class Search(webdriver.Chrome):
                 'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": ' + json.dumps(message) + '}}')
         
     def apply_filters(self, category=None, brand=None, flipkart_assured=None, price=None):
+        
+        """
+        The following method is used to apply the filters to the page where the product is searched
+        and the executes the script accordinly to update the status
+        
+        Args:
+          category: Category of the product
+          brand: Name of the brand
+          flipkart_assured:  flipkart_assured or not
+          price: Sort the price
+        """
+        
         try:
             filters = SearchFilters(driver=self)
             filters.apply_category(category)
@@ -78,6 +117,12 @@ class Search(webdriver.Chrome):
                 'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": ' + json.dumps(message) + '}}')
         
     def get_parameters(self):
+        
+        
+        """
+        The following method is used to get the parametes from the final page and store it in a list
+        and then print results. For bettter I have used python library "prettytable".
+        """
         
         try:
             collect_data = CollectData(driver=self)
