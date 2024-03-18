@@ -11,11 +11,14 @@ class SearchFilters:
         
     def check_filter(self, filter):
         filter_element = WebDriverWait(self.driver, 10).until(
-            (EC.visibility_of_element_located((By.CSS_SELECTOR, 'div[class="_3sckoD"]')))
-        ).get_attribute('innerHTML').strip()
+            (EC.visibility_of_element_located((By.CSS_SELECTOR, 'div[class="_2vLW0p"]')))
+        )
         
-        if filter_element == filter:
-            return
+        filters = filter_element.find_elements(By.CSS_SELECTOR, 'div[class="_3sckoD"]')
+        
+        for element in filters:
+            if element.get_attribute('innerHTML') == filter:
+                return
         
     def wait_for_class_change(self, element, class_name):
         """
@@ -34,12 +37,13 @@ class SearchFilters:
         
         try:
             category_element = WebDriverWait(self.driver, 10).until(
-                (EC.visibility_of_element_located((By.CLASS_NAME, '_2q_g77')))
-            ).find_element(By.CLASS_NAME, "_1jJQdf")
+                (EC.visibility_of_element_located((By.CSS_SELECTOR, 'a[class="_1jJQdf _2Mji8F"]')))
+            )
             
             text = category_element.get_attribute('innerHTML').strip()
             if text == category:
                 category_element.click()
+                WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//footer")))
         except Exception as e:
             logging.error(f"Error in applying category: {e}")
             
@@ -50,7 +54,7 @@ class SearchFilters:
             ).click()
             self.check_filter(brand)
         except Exception as e:
-            logging.error("Error in applying brand filter: {e}")
+            logging.error(f"Error in applying brand filter: {e}")
         
         
     def select_assured(self, value):
@@ -61,7 +65,7 @@ class SearchFilters:
                 ).click()
                 self.check_filter(value)
         except Exception as e:
-            logging.error("Error in applying assured filter: {e}")
+            logging.error(f"Error in applying assured filter: {e}")
             
     def sort_price(self, price_high_to_low=None):
         
@@ -75,7 +79,7 @@ class SearchFilters:
                         
                         self.wait_for_class_change(element, "_10UF8M _3LsR0e")
         except Exception as e:
-            logging.error("Error in sorting price: {e}")
+            logging.error(f"Error in sorting price: {e}")
                     
         
                     
