@@ -10,6 +10,7 @@ from search.search_filters import SearchFilters
 from search.collect_data import CollectData
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.common.exceptions import NoSuchElementException
+from prettytable import PrettyTable
 
 class Search(webdriver.Chrome):
     
@@ -81,6 +82,12 @@ class Search(webdriver.Chrome):
         try:
             collect_data = CollectData(driver=self)
             attributes = collect_data.pull_attributes()
+            table = PrettyTable(
+            field_names=["Name", "Price", "Link"]
+            )
+            table.add_rows(attributes)
+            print(table)
+            
             self.execute_script(
                'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed", "reason": "All attributes are stored!"}}') 
             return attributes
