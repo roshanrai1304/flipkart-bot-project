@@ -27,7 +27,7 @@ platforms:
     browserName: Safari
     browserVersion: 13.1
   - os: Windows
-    osVersion: 10
+    osVersion: 11
     browserName: Firefox
     browserVersion: 121.0
   
