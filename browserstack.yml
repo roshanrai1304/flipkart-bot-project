@@ -1,7 +1,7 @@
 
 # BrowserStack userName and accesskey
-userName:          # USERNAME
-accessKey:         # ACCESSKEY
+userName: # USERNAME
+accessKey:  # ACCESSKEY
 
 # Project and Build Details
 projectName: FlipKart Bot PC
